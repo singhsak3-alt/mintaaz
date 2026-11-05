@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Mintaaz design system
+
+Before changing any page or component, read `DESIGN_SYSTEM.md`. The design is fixed: reuse the tokens in `src/app/globals.css` and the components in `src/components/`; do not introduce new colours, sizes or section styles.

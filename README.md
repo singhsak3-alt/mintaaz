@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mintaaz website
 
-## Getting Started
+The Mintaaz studio site: Home, Work, Services, About, Contact and 15 case studies.
+Built with Next.js 16 (App Router, Cache Components), TypeScript and Tailwind CSS v4.
 
-First, run the development server:
+Before changing anything, read **[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md)**. The design is fixed;
+new work reuses the existing tokens and components.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build (also type-checks)
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Images and videos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All media goes in `public/images/`, named as in `image-map.csv` from the design bundle
+(for example `public/images/tenx/tenx-app-icon-558458.png`). Any extension works.
+Until a file is added, the page shows a grey placeholder tile with its alt text.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contact form
 
-## Learn More
+`/api/contact` emails submissions through [Resend](https://resend.com). Set these in
+Vercel → Project → Environment Variables (or `.env.local` for local testing):
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Example |
+| --- | --- |
+| `RESEND_API_KEY` | `re_…` |
+| `CONTACT_TO` | `info@mintaaz.com` |
+| `CONTACT_FROM` | `Mintaaz <website@mintaaz.com>` (must be a verified Resend sender) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Without `RESEND_API_KEY`, submissions are logged in development and rejected in production.
+A hidden honeypot field filters simple spam bots.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Placeholders still to replace
 
-## Deploy on Vercel
+Search the project for `[` inside quotes to find them:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Home CTA reply time `[X]`
+- About: founder/team names, bios, photos, milestone years and stories, story paragraphs, mission/vision sentences
+- Contact: street address, FAQ price range and start time
+- Services: 3D studio render and showreel video
+- `src/content/site.ts`: social profile URLs, Privacy and Terms pages, production domain
+- `src/content/contact.ts`: swap the "Book a meeting" email link for a booking link if you have one
