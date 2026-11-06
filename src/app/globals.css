@@ -16,6 +16,8 @@
   --color-accent-soft: #eef0ff;
   --color-accent-line: #c7cbf5;
   --color-accent-tint: #a5b4fc;
+  --color-wood: #c98354; /* shaded pencil wood from the home hero artwork; home marquee gradient */
+  --color-wood-dark: #5b3a20; /* deepest wood shadow in the same artwork; marquee gradient end */
   --color-text-1: #262626; /* strong body copy on white */
   --color-text-2: #404040; /* lead paragraphs */
   --color-text-3: #525252; /* secondary text, eyebrows, meta */
@@ -158,13 +160,55 @@
 .mz-dots circle:nth-child(3n) { animation-delay: -1s; }
 .mz-dots circle:nth-child(3n + 1) { animation-delay: -2s; }
 
+/* Home marquee band: wood → dark-wood gradient with two blurred "clouds"
+   drifting on different, uneven loops so the colour never repeats the same way. */
+.mz-band {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(90deg, var(--color-wood), var(--color-wood-dark));
+}
+.mz-band::before,
+.mz-band::after {
+  content: "";
+  position: absolute;
+  inset: -80% -25%;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(28px);
+}
+.mz-band::before {
+  background:
+    radial-gradient(30% 55% at 30% 50%, var(--color-wood-dark), transparent 70%),
+    radial-gradient(26% 50% at 78% 45%, var(--color-wood), transparent 70%);
+  animation: mz-cloud-a 19s ease-in-out infinite alternate;
+}
+.mz-band::after {
+  background:
+    radial-gradient(24% 50% at 58% 55%, var(--color-wood), transparent 70%),
+    radial-gradient(22% 45% at 12% 40%, var(--color-wood-dark), transparent 70%);
+  opacity: 0.85;
+  animation: mz-cloud-b 27s ease-in-out infinite alternate;
+}
+@keyframes mz-cloud-a {
+  0% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(14%, -6%) scale(1.1); }
+  65% { transform: translate(-8%, 5%) scale(0.95); }
+  100% { transform: translate(10%, 3%) scale(1.05); }
+}
+@keyframes mz-cloud-b {
+  0% { transform: translate(0, 0) scale(1.05); }
+  40% { transform: translate(-16%, 4%) scale(0.92); }
+  75% { transform: translate(6%, -5%) scale(1.12); }
+  100% { transform: translate(-10%, -2%) scale(1); }
+}
+
 /* Logo marquee pauses on hover */
 .mz-logos:hover .mz-logos-track {
   animation-play-state: paused;
 }
 
 /* ==========================================================================
-   Home hero (values from home.html, scaled from the 1200px stage with cqw)
+   Home hero: centred copy with the artwork below (1200px stage)
    ========================================================================== */
 
 .hero-stage {
@@ -172,15 +216,11 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  container-type: inline-size;
 }
 .hero-copy {
-  position: absolute;
-  z-index: 5;
-  left: 0;
-  right: 0;
-  top: 7%;
-  padding: 0 16px;
+  position: relative;
+  z-index: 1; /* keeps the text above the artwork's white edge */
+  padding: 40px 16px 0;
   text-align: center;
 }
 .hero-title {
@@ -197,73 +237,12 @@
   font-size: clamp(16px, 1.5vw, 20px);
   line-height: 1.55;
 }
-.hero-scene {
-  position: relative; /* no z-index: the plane (z 6) must sit above the copy (z 5) */
-  width: 100%;
-  aspect-ratio: 1920 / 990;
-  overflow: hidden;
-  pointer-events: none;
-}
-.hero-shadow {
-  position: absolute;
-  left: 34.333cqw;
-  top: 21.167cqw;
-  width: 35.25cqw;
-  height: 28.5cqw;
-  transform-origin: center;
-  animation: mz-pshadow 6s ease-in-out infinite;
-}
-.hero-plane {
-  position: absolute;
-  z-index: 6;
-  left: 29.083cqw;
-  top: 10.083cqw;
-  width: 42.333cqw;
-  height: 26.5cqw;
-  overflow: hidden;
-  pointer-events: none;
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  transform-origin: 30% 60%;
-  animation: mz-fly 6s ease-in-out infinite;
-}
-.hero-plane-inner {
-  position: absolute;
-  left: -29.083cqw;
-  top: -10.083cqw;
-  width: 100cqw;
-  aspect-ratio: 1920 / 990;
-  text-shadow: 0 0 1px #fff, 0 0 1px #fff;
-  transform-origin: 41.783cqw 25.983cqw;
-  animation: mz-fly-inv 6s ease-in-out infinite;
-}
-@keyframes mz-fly {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(12px, -18px) rotate(-2deg); }
-  50% { transform: translate(26px, -6px) rotate(1deg); }
-  75% { transform: translate(8px, 10px) rotate(2deg); }
-  100% { transform: translate(0, 0) rotate(0deg); }
-}
-@keyframes mz-fly-inv {
-  0% { transform: rotate(0deg) translate(0, 0); }
-  25% { transform: rotate(2deg) translate(-12px, 18px); }
-  50% { transform: rotate(-1deg) translate(-26px, 6px); }
-  75% { transform: rotate(-2deg) translate(-8px, -10px); }
-  100% { transform: rotate(0deg) translate(0, 0); }
-}
-@keyframes mz-pshadow {
-  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.52; filter: blur(2px); }
-  25% { transform: translate(-10px, 12px) scale(1.04); opacity: 0.44; filter: blur(6px); }
-  50% { transform: translate(-18px, 4px) scale(1.06); opacity: 0.4; filter: blur(9px); }
-  75% { transform: translate(-6px, -6px) scale(0.98); opacity: 0.48; filter: blur(4px); }
-}
-/* Phones/tablets: the headline is taller than the stage, so it moves into
-   the normal flow above the illustration; the plane's white-text copy is hidden. */
-@media (max-width: 860px) {
-  .hero-copy { position: relative; top: auto; padding-top: 40px; }
-  .hero-plane-inner { display: none; }
+/* Hero artwork (920×780) centred under the copy */
+.hero-art {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 920 / 780;
+  margin: -10px auto 0; /* tucks the artwork's white top margin under the copy */
 }
 
 /* ==========================================================================

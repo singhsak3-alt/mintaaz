@@ -21,7 +21,7 @@ sections reuse what's listed here; they don't invent new styles.
 ## Tokens: use these, nothing else
 
 Colours (Tailwind class names): `ink` #0A0A0A · `paper` #FFF · `accent` #4338CA ·
-`accent-hover` #3730A3 · `accent-soft` #EEF0FF · `accent-line` #C7CBF5 · `accent-tint` #A5B4FC ·
+`accent-hover` #3730A3 · `accent-soft` #EEF0FF · `accent-line` #C7CBF5 · `accent-tint` #A5B4FC · `wood` #C98354 · `wood-dark` #5B3A20 (home marquee only: `.mz-band`, a drifting `wood` → `wood-dark` cloud gradient, from the hero artwork) ·
 `text-1` #262626 · `text-2` #404040 · `text-3` #525252 · `text-4` #A3A3A3 (dark panels only) ·
 `on-dark` #D4D4D4 · `line` #E5E5E5 · `line-strong` #D4D4D4 · `line-soft` #EDEDED · `line-faint` #F0F0F0 · `line-dashed` #BDBDBD · `placeholder` #8A8A8A · `surface` #FAFAFA · `surface-2` #F2F2F2.
 
@@ -41,7 +41,7 @@ Dividers are always 1px `border-line` (1.5px white only on dark panels).
 
 | Need | Use |
 | --- | --- |
-| Any button or button-styled link | `ButtonLink` / `Button` (`primary`, `secondary`, `inverse`; `sm`/`md`/`lg`) |
+| Any button or button-styled link | `ButtonLink` / `Button` (`primary`, `secondary`, `inverse`; `sm`/`md`/`lg`). A disabled `Button` fades to 40% opacity and ignores hover/clicks |
 | Section heading | `SectionHeader` (`size="section"` or `"case"`) + `Accent` for the italic word |
 | Project tile | `ProjectCard` (`feature` on Home, `grid` on Work) |
 | "What we do" panel | `ServicesPanel` |

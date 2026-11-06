@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { ButtonLink } from "@/components/Button";
 import { CtaBand } from "@/components/CtaBand";
 import { DotCluster } from "@/components/DotCluster";
 import { MediaImage } from "@/components/Media";
 import { Accent } from "@/components/SectionHeader";
-import { Milestones } from "@/components/about/Milestones";
-import { TeamPicker } from "@/components/about/TeamPicker";
 import { aboutHero, mission, partner, story, values } from "@/content/about";
-import { aboutBand } from "@/content/services";
 import { clients } from "@/content/clients";
 
 export const metadata: Metadata = {
@@ -15,48 +11,43 @@ export const metadata: Metadata = {
   description: aboutHero.intro.join(" "),
 };
 
-/** Team-portrait tile composition (positions from about.html). */
-const TILES: { left: string; top: string; size: number; tone: "ink" | "outline" | "grey" }[] = [
-  { left: "4%", top: "8%", size: 62, tone: "ink" },
-  { left: "30%", top: "2%", size: 44, tone: "outline" },
-  { left: "82%", top: "4%", size: 68, tone: "ink" },
-  { left: "86%", top: "52%", size: 52, tone: "outline" },
-  { left: "0%", top: "62%", size: 72, tone: "ink" },
-  { left: "26%", top: "88%", size: 40, tone: "grey" },
-  { left: "76%", top: "86%", size: 46, tone: "outline" },
+/**
+ * Team-portrait tile composition (positions from about.html).
+ * PLACEHOLDER: project covers stand in until team portraits and a studio photo are supplied.
+ */
+const W = "/images/work";
+const TEAM_PHOTO = `${W}/billd-billing-website-on-a-desktop-monit-41a9b2`;
+const TILES: { left: string; top: string; size: number; src: string }[] = [
+  { left: "4%", top: "8%", size: 62, src: `${W}/zave-business-cards-2d60a2` },
+  { left: "30%", top: "2%", size: 44, src: `${W}/uax-stake-3d-coin-visual-on-purple-3b31a3` },
+  { left: "82%", top: "4%", size: 68, src: `${W}/arisunitern-logo-over-a-city-skyline-686ac2` },
+  { left: "86%", top: "52%", size: 52, src: `${W}/bookdu-reading-app-on-a-phone-9a041d` },
+  { left: "0%", top: "62%", size: 72, src: `${W}/nexa-ai-platform-shown-on-two-tablets-f68cca` },
+  { left: "26%", top: "88%", size: 40, src: `${W}/collage-of-character-and-vehicle-sketche-307c2e` },
+  { left: "76%", top: "86%", size: 46, src: `${W}/swash-breathing-quality-dashboard-on-a-d-7b31d3` },
 ];
 
 function PortraitTiles() {
   return (
     <div className="pb-10">
-      <div className="relative mx-auto aspect-[1/0.92] w-full max-w-[460px]">
-        {TILES.map((t, i) => (
+      <div aria-hidden="true" className="relative mx-auto aspect-[1/0.92] w-full max-w-[460px]">
+        {TILES.map((t) => (
           <div
-            key={i}
-            aria-hidden="true"
-            className={`absolute box-border rounded-inner ${
-              t.tone === "ink"
-                ? "bg-ink"
-                : t.tone === "grey"
-                  ? "bg-text-3"
-                  : "border-[1.5px] border-ink bg-paper"
-            }`}
+            key={t.src}
+            className="absolute overflow-hidden rounded-inner bg-ink"
             style={{ left: t.left, top: t.top, width: t.size, height: t.size }}
-          />
+          >
+            <MediaImage src={t.src} alt="" fill sizes="72px" className="object-cover" />
+          </div>
         ))}
-        <div aria-hidden="true" className="absolute left-[13%] top-[32%] grid grid-cols-[repeat(3,6px)] gap-[9px]">
+        <div className="absolute left-[13%] top-[32%] grid grid-cols-[repeat(3,6px)] gap-[9px]">
           {Array.from({ length: 12 }).map((_, i) => (
             <span key={i} className="size-1.5 rounded-full bg-ink" />
           ))}
         </div>
-        <div className="absolute left-[33%] top-[22%] h-[54%] w-[42%]">
-          <div className="box-border flex h-full items-end rounded-tile border-[1.5px] border-dashed border-line-dashed bg-paper p-4">
-            <span className="eyebrow text-[11px] tracking-[0.08em]">[Team photo]</span>
-          </div>
+        <div className="absolute left-[33%] top-[22%] h-[54%] w-[42%] overflow-hidden rounded-tile bg-ink">
+          <MediaImage src={TEAM_PHOTO} alt="" fill sizes="200px" className="object-cover" />
         </div>
-        <p className="eyebrow absolute inset-x-0 -bottom-10 m-0 text-center text-[11px] tracking-[0.08em]">
-          [Small tiles = team portraits]
-        </p>
       </div>
     </div>
   );
@@ -89,11 +80,6 @@ export default function AboutPage() {
                 {partner.title[0]}
                 <Accent>{partner.title[1]}</Accent>
               </p>
-              <div className="mt-6">
-                <ButtonLink href="#story" size="sm">
-                  Learn more
-                </ButtonLink>
-              </div>
             </div>
             <PortraitTiles />
             <div>
@@ -122,14 +108,13 @@ export default function AboutPage() {
               ))}
             </div>
           </div>
-          <Milestones />
         </section>
 
         {/* Mission & vision */}
         <section id="mission" className="container-site pt-32">
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,440px),1fr))] gap-4">
-            <div className="rounded-hero bg-ink p-[clamp(32px,4vw,56px)] text-paper transition-transform duration-[250ms] hover:-translate-y-1">
-              <p className="eyebrow m-0 mb-[22px] tracking-[0.08em] text-text-4">Our mission</p>
+            <div className="rounded-hero bg-accent p-[clamp(32px,4vw,56px)] text-paper transition-transform duration-[250ms] hover:-translate-y-1">
+              <p className="eyebrow m-0 mb-[22px] tracking-[0.08em] text-accent-tint">Our mission</p>
               <p className="m-0 text-[clamp(28px,2.8vw,40px)] font-bold leading-[1.08] tracking-[-0.035em]">
                 {mission.mission.title[0]}
                 <Accent>{mission.mission.title[1]}</Accent>
@@ -166,18 +151,6 @@ export default function AboutPage() {
               ))}
             </ol>
           </div>
-        </section>
-
-        {/* Team */}
-        <section id="team" className="container-site pt-32">
-          <div className="mb-12">
-            <p className="eyebrow m-0 mb-[18px] tracking-[0.08em]">04 — The team</p>
-            <h2 className="m-0 text-[clamp(36px,4.4vw,64px)] font-bold leading-none tracking-[-0.045em]">
-              {aboutBand.title[0]}
-              <Accent>{aboutBand.title[1]}</Accent>
-            </h2>
-          </div>
-          <TeamPicker />
         </section>
 
         {/* Brands */}

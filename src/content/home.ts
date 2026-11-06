@@ -5,11 +5,10 @@ import type { Cover } from "./projects";
 export const homeHero = {
   /** H1 split into plain / italic / plain parts */
   title: ["Imagination, ", "Innovation,", " Distinction."] as const,
-  lead: "We shape brands, websites and motion for founders and teams who want to be remembered — strategy, design and code under one roof.",
-  plane: {
-    src: "/images/home/image-683d86",
-    shadow: "/images/home/image-bef925",
-    label: "Indigo paper plane casting the shadow of a jet",
+  lead: "Brands, websites and motion for teams who want to be remembered.",
+  art: {
+    src: "/images/home/pencil-rock-hero",
+    alt: "A pencil that is half carved wood and half raw black stone, with wood shavings and stone chips around it",
   },
 };
 
@@ -40,7 +39,7 @@ export const selectedWork: FeatureCard[] = [
   {
     slug: "happtag",
     title: "Smarthapps",
-    badge: "3D & motion",
+    badge: "Product design",
     badgeTone: "light",
     tags: "Product render · 3D · Motion",
     year: "2025",
@@ -94,5 +93,5 @@ export const selectedWork: FeatureCard[] = [
 ];
 
 export const homeCta = {
-  text: "Tell us where you are and where you want to be. We'll come back within [X] working days with ideas, a plan and an honest estimate.",
+  text: "Tell us where you are and where you want to be. We'll come back within 2 working days with ideas, a plan and an honest estimate.",
 };

@@ -3,15 +3,13 @@ import type { Faq } from "@/components/FaqAccordion";
 /** Contact page copy (contact.html). Text in [brackets] is placeholder until supplied. */
 
 export const contactIntro =
-  "New project, a role on the team, or just a hello — pick one and we'll take it from there.";
+  "New project or just a hello — pick one and we'll take it from there.";
 
 export const replyNote = "We reply within two working days.";
 export const sentNote = "Thanks — we'll be in touch soon.";
 
 export const formTabs = [
   { id: "project", label: "Start a project", submit: "Send project brief" },
-  // The reference design leaves this tab unlabelled; name suggested in the brief.
-  { id: "join", label: "Join the team", submit: "Send application" },
   { id: "hi", label: "Say hi", submit: "Send message" },
 ] as const;
 
@@ -19,14 +17,13 @@ export type FormKind = (typeof formTabs)[number]["id"];
 
 export const needs = ["Brand identity", "Website", "App / product", "Campaign", "3D & renders", "Motion"];
 export const budgets = ["Under ₹5L", "₹5–15L", "₹15–40L", "₹40L+"];
-export const roles = ["Designer", "Developer", "3D & motion", "Something else"];
 
 export const studio = {
   callTitle: ["Rather talk it ", "through?"] as const,
   callText: "Grab a free 20-minute intro call with our founder.",
   // Swap for a Calendly / Cal.com link when available.
   callHref: "mailto:info@mintaaz.com?subject=Intro%20call",
-  address: ["[Street address]", "Bengaluru, Karnataka"],
+  address: ["3rd Floor, 806, 27th Main Rd, 1st Sector, HSR Layout", "Bengaluru, Karnataka 560102"],
 };
 
 export const faqs: Faq[] = [

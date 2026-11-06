@@ -25,12 +25,6 @@ export const story = {
     "[How the studio grew — the first big project, the people who joined, and what you learned along the way.]",
     "[Where you are today — the kinds of clients you work with and what makes working with you different.]",
   ],
-  milestones: [
-    { year: "[YEAR]", label: "The studio opens", text: "[What happened: the founding moment, the first client, the first desk.]" },
-    { year: "[YEAR]", label: "First big brand", text: "[The project that put Mintaaz on the map — who it was for and what changed.]" },
-    { year: "[YEAR]", label: "The team grows", text: "[Who joined, what new skills came in, and the work it unlocked.]" },
-    { year: "[YEAR]", label: "Today", text: "[Where the studio is now — the clients, the team and what comes next.]" },
-  ],
 };
 
 export const mission = {
@@ -49,13 +43,4 @@ export const values = [
   { title: "Design with, not for", text: "You’re in the room every week. No big-reveal surprises." },
   { title: "Built to last", text: "Systems your team can run long after we hand over the keys." },
   { title: "Curious, always", text: "We ask the extra question. It’s usually where the idea is." },
-];
-
-const bio = "[Two or three sentences: background, what they lead, and what they love about the work.]";
-
-export const team = [
-  { name: "[Founder name]", role: "Founder · Creative Director", bio, tags: ["Brand strategy", "Art direction", "Client partnerships"] },
-  { name: "[Name]", role: "Brand Designer", bio, tags: ["Identity systems", "Typography", "Packaging"] },
-  { name: "[Name]", role: "Lead Developer", bio, tags: ["Front-end", "Design systems", "Performance"] },
-  { name: "[Name]", role: "3D & Motion Artist", bio, tags: ["3D renders", "Motion", "Product visuals"] },
 ];

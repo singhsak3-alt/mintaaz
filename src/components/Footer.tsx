@@ -27,10 +27,9 @@ function SmartLink({ item, className }: { item: NavItem; className?: string }) {
   );
 }
 
-function Column({ title, items }: { title: string; items: NavItem[] }) {
+function Column({ label, items }: { label: string; items: NavItem[] }) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <span className="eyebrow mb-[14px] tracking-[0.08em]">{title}</span>
+    <div role="group" aria-label={label} className="flex flex-col gap-1.5">
       {items.map((item) => (
         <SmartLink
           key={item.label}
@@ -45,9 +44,9 @@ function Column({ title, items }: { title: string; items: NavItem[] }) {
 export function Footer() {
   const mailto = `mailto:${site.email}`;
   return (
-    <footer className="container-site pb-10 pt-32">
+    <footer className="container-site pb-8 pt-24">
       {/* Contact statement */}
-      <div className="flex flex-wrap items-end justify-between gap-8 border-b border-line pb-16">
+      <div className="flex flex-wrap items-end justify-between gap-8 border-b border-line pb-12">
         <div>
           <Suspense fallback={null}>
             <FooterEyebrow />
@@ -66,7 +65,7 @@ export function Footer() {
       </div>
 
       {/* Brand + link columns */}
-      <div className="flex flex-wrap gap-x-16 gap-y-[72px] pt-[72px]">
+      <div className="flex flex-wrap gap-x-16 gap-y-12 pt-12">
         <div className="flex max-w-[460px] flex-[2_1_380px] flex-col gap-7">
           <div className="flex w-full max-w-[360px] flex-col gap-0.5">
             <Link href="/" aria-label="Mintaaz home" className="block no-underline">
@@ -95,10 +94,10 @@ export function Footer() {
           aria-label="Footer"
           className="grid flex-[3_1_480px] grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] items-start gap-x-8 gap-y-12"
         >
-          <Column title="Studio" items={studioNav} />
-          <Column title="Follow" items={socialLinks} />
+          <Column label="Studio" items={studioNav} />
+          <Column label="Follow" items={socialLinks} />
           <Column
-            title="Get in touch"
+            label="Get in touch"
             items={[
               { label: site.email, href: mailto },
               { label: "Start a project ↗", href: "/contact" },
@@ -109,7 +108,7 @@ export function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="mt-24 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-line pt-7 text-sm text-text-3">
+      <div className="mt-14 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 border-t border-line pt-7 text-sm text-text-3">
         <span>{site.copyright}</span>
         <span className="flex gap-5">
           {legalLinks.map((l) => (

@@ -4,7 +4,6 @@ import { ButtonLink } from "@/components/Button";
 import { DotCluster } from "@/components/DotCluster";
 import { Accent } from "@/components/SectionHeader";
 import { AiPipeline } from "@/components/services/AiPipeline";
-import { Showreel } from "@/components/services/Showreel";
 import { aboutBand, processIntro, servicesHero } from "@/content/services";
 
 export const metadata: Metadata = {
@@ -62,7 +61,7 @@ function Hero() {
 function Process() {
   return (
     <section id="process" className="pt-32">
-      <div className="relative mx-auto max-w-[var(--container-site)] overflow-clip bg-paper px-8 text-ink max-[480px]:px-4">
+      <div className="relative mx-auto max-w-[var(--container-site)] overflow-clip bg-paper px-8 pb-12 text-ink max-[480px]:px-4">
         <svg
           className="mz-dots pointer-events-none absolute inset-0"
           width="100%"
@@ -113,7 +112,6 @@ export default function ServicesPage() {
   return (
     <main>
       <Hero />
-      <Showreel />
       <ServicesPanel
         showNumbers
         className="pt-24"

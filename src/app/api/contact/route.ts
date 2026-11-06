@@ -10,18 +10,16 @@
  * (503) in production, so nothing is silently lost.
  */
 
-const KINDS = { project: "New project brief", join: "Job application", hi: "Hello" } as const;
+const KINDS = { project: "New project brief", hi: "Hello" } as const;
 type Kind = keyof typeof KINDS;
 
 const LIMITS: Record<string, number> = {
   name: 120,
   email: 200,
   company: 200,
-  portfolio: 300,
   launch: 120,
   message: 5000,
   budget: 40,
-  role: 40,
 };
 
 function clean(v: unknown, max: number) {
@@ -62,8 +60,6 @@ export async function POST(request: Request) {
     ["Company", data.company],
     ["Needs", needs],
     ["Budget", data.budget],
-    ["Role", data.role],
-    ["Portfolio", data.portfolio],
     ["Launch", data.launch],
     ["Message", data.message],
   ];

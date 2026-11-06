@@ -13,6 +13,8 @@ import { ArrowRight, ArrowUpRight } from "./icons";
  * - sm  15px · 13×22  header, small cards
  * - md  16px · 15×26  section actions, form submit
  * - lg  17px · 18×30  closing CTAs
+ *
+ * Disabled <Button>s fade to 40% and ignore hover/clicks.
  */
 
 type Variant = "primary" | "secondary" | "inverse";
@@ -20,7 +22,7 @@ type Size = "sm" | "md" | "lg";
 type Icon = "up-right" | "right" | "none";
 
 const base =
-  "inline-flex items-center justify-center rounded-pill font-semibold no-underline cursor-pointer transition-[background-color,color,border-color,transform] duration-200 ease-[ease] max-[480px]:data-[solo]:w-full";
+  "inline-flex items-center justify-center rounded-pill font-semibold no-underline cursor-pointer transition-[background-color,color,border-color,transform,opacity] duration-200 ease-[ease] max-[480px]:data-[solo]:w-full disabled:pointer-events-none disabled:opacity-40";
 
 const sizes: Record<Size, string> = {
   sm: "text-[15px] gap-2 px-[22px] py-[13px]",

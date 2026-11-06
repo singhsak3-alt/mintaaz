@@ -6,7 +6,6 @@ import {
   formTabs,
   needs,
   replyNote,
-  roles,
   sentNote,
   type FormKind,
 } from "@/content/contact";
@@ -15,7 +14,7 @@ import { Button } from "../Button";
 import { Check } from "../icons";
 
 /**
- * Tabbed contact form: Start a project · Join the team · Say hi.
+ * Tabbed contact form: Start a project · Say hi.
  * Posts JSON to /api/contact. Chips are buttons with aria-pressed.
  */
 
@@ -55,8 +54,9 @@ export function ContactForm() {
   const [tab, setTab] = useState<FormKind>("project");
   const [picked, setPicked] = useState<Set<number>>(new Set([0, 1]));
   const [budget, setBudget] = useState(1);
-  const [role, setRole] = useState(0);
   const [status, setStatus] = useState<Status>("idle");
+  /** Submit stays disabled until the visitor types into any field. */
+  const [started, setStarted] = useState(false);
 
   const current = formTabs.find((t) => t.id === tab)!;
 
@@ -70,7 +70,6 @@ export function ContactForm() {
         needs: [...picked].map((i) => needs[i]),
         budget: budgets[budget],
       }),
-      ...(tab === "join" && { role: roles[role] }),
     };
     setStatus("sending");
     try {
@@ -105,6 +104,7 @@ export function ContactForm() {
               onClick={() => {
                 setTab(t.id);
                 setStatus("idle");
+                setStarted(false);
               }}
               className={`inline-flex min-h-11 cursor-pointer items-center rounded-pill border-0 px-5 font-[inherit] text-[15px] font-semibold ${
                 on ? "bg-ink text-paper" : "bg-transparent text-ink"
@@ -122,6 +122,12 @@ export function ContactForm() {
         role="tabpanel"
         aria-labelledby={`${id}-tab-${tab}`}
         onSubmit={onSubmit}
+        onInput={(e) => {
+          const filled = [...new FormData(e.currentTarget).entries()].some(
+            ([k, v]) => k !== "website" && typeof v === "string" && v.trim() !== "",
+          );
+          setStarted(filled);
+        }}
         className="mt-9 flex flex-col gap-7"
       >
         {/* Spam trap: hidden from people, filled by bots */}
@@ -157,16 +163,6 @@ export function ContactForm() {
           </>
         )}
 
-        {tab === "join" && (
-          <ChipGroup title="Which role?">
-            {roles.map((r, i) => (
-              <Chip key={r} on={role === i} onClick={() => setRole(i)}>
-                {r}
-              </Chip>
-            ))}
-          </ChipGroup>
-        )}
-
         <div className={row}>
           <label className={labelCls}>
             Your name
@@ -189,12 +185,6 @@ export function ContactForm() {
               <input className={inputCls} name="company" type="text" placeholder="Company or brand" autoComplete="organization" />
             </label>
           )}
-          {tab === "join" && (
-            <label className={labelCls}>
-              Portfolio link
-              <input className={inputCls} name="portfolio" type="url" placeholder="behance.net/you" autoComplete="url" />
-            </label>
-          )}
         </div>
 
         {tab === "project" && (
@@ -207,18 +197,14 @@ export function ContactForm() {
         )}
 
         <label className={labelCls}>
-          {tab === "project" ? "Tell us about the project" : tab === "join" ? "Tell us about yourself" : "Your message"}
+          {tab === "project" ? "Tell us about the project" : "Your message"}
           <textarea
             className={`${inputCls} min-h-[140px] resize-y`}
             name="message"
             rows={5}
             required
             placeholder={
-              tab === "project"
-                ? "Goals, audience, anything you already have…"
-                : tab === "join"
-                  ? "What you love making, and where you’d like to grow…"
-                  : "Say hello, ask a question, share an idea…"
+              tab === "project" ? "Goals, audience, anything you already have…" : "Say hello, ask a question, share an idea…"
             }
           />
         </label>
@@ -231,7 +217,7 @@ export function ContactForm() {
               {sentNote}
             </p>
           ) : (
-            <Button type="submit" disabled={status === "sending"} solo>
+            <Button type="submit" disabled={!started || status === "sending"} solo>
               {current.submit}
             </Button>
           )}

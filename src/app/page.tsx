@@ -6,6 +6,7 @@ import { ProjectCard } from "@/components/ProjectCard";
 import { ButtonLink } from "@/components/Button";
 import { SectionHeader, Accent } from "@/components/SectionHeader";
 import { Sparkle } from "@/components/icons";
+import { FitToggle } from "@/components/home/FitToggle";
 import { homeCta, homeHero, homeMarquee, selectedWork, selectedWorkLead } from "@/content/home";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ function ServiceStrip() {
     </span>
   );
   return (
-    <div aria-hidden="true" className="mt-2 overflow-hidden bg-accent py-[22px] text-paper">
+    <div aria-hidden="true" className="mz-band mt-2 overflow-hidden py-[22px] text-paper">
       <div className="flex w-max animate-[mz-marquee_28s_linear_infinite] whitespace-nowrap text-[40px] font-semibold tracking-[-0.03em]">
         {line}
         {line}
@@ -78,10 +79,7 @@ function HomeCta() {
       <div className="relative mx-auto max-w-[var(--container-wide)] overflow-hidden rounded-panel bg-paper px-[clamp(24px,4vw,64px)] py-[clamp(64px,8vw,128px)] text-center text-ink">
         <h2 className="relative mx-auto my-0 max-w-[1080px] text-[clamp(44px,6.4vw,96px)] font-bold leading-[1.02] tracking-[-0.05em]">
           Wondering if we&apos;re{" "}
-          <span
-            aria-hidden="true"
-            className="relative inline-block h-[0.72em] w-[1.5em] rounded-pill bg-accent align-[-0.05em]"
-          />{" "}
+          <FitToggle />{" "}
           the right fit?{" "}
           <span
             aria-hidden="true"
@@ -98,7 +96,7 @@ function HomeCta() {
           <ButtonLink href="/contact" size="lg">
             Book a free call
           </ButtonLink>
-          <ButtonLink href="#work" size="lg" variant="secondary">
+          <ButtonLink href="/work" size="lg" variant="secondary">
             See the work
           </ButtonLink>
         </div>

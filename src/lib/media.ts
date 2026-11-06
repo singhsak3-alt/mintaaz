@@ -25,7 +25,9 @@ function resolve(src: string, exts: string[]): string | null {
   const candidates = path.extname(src) ? [src] : exts.map((e) => src + e);
   const found =
     candidates.find((c) => fs.existsSync(path.join(PUBLIC_DIR, c))) ?? null;
-  cache.set(key, found);
+  // In development, don't remember misses: files exported while `next dev`
+  // is running should appear on the next refresh instead of staying placeholders.
+  if (found || process.env.NODE_ENV === "production") cache.set(key, found);
   return found;
 }
 
