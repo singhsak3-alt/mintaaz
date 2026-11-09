@@ -49,6 +49,27 @@ export const ArrowRight = (p: IconProps) => (
   </Svg>
 );
 
+/** ↓ into a tray: file downloads */
+export const Download = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />
+  </Svg>
+);
+
+/** ☰ mobile menu toggle */
+export const Menu = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
+  </Svg>
+);
+
+/** ✕ close the mobile menu */
+export const Close = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M6 6l12 12M18 6L6 18" />
+  </Svg>
+);
+
 export const Check = (p: IconProps) => (
   <Svg {...p}>
     <path d="M5 12l5 5L20 7" />

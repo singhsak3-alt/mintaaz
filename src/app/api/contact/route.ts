@@ -3,7 +3,7 @@
  *
  * Environment variables (set in Vercel / .env.local):
  *   RESEND_API_KEY   API key from resend.com
- *   CONTACT_TO       Inbox that receives submissions (e.g. info@mintaaz.com)
+ *   CONTACT_TO       Inbox that receives submissions (e.g. sarah@mintaaz.com)
  *   CONTACT_FROM     Verified sender, e.g. "Mintaaz <website@mintaaz.com>"
  *
  * Without RESEND_API_KEY, submissions are logged in development and rejected
@@ -85,7 +85,7 @@ export async function POST(request: Request) {
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: process.env.CONTACT_FROM ?? "Mintaaz website <onboarding@resend.dev>",
-      to: [process.env.CONTACT_TO ?? "info@mintaaz.com"],
+      to: [process.env.CONTACT_TO ?? "sarah@mintaaz.com"],
       reply_to: data.email,
       subject,
       text,

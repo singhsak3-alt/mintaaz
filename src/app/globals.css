@@ -16,6 +16,8 @@
   --color-accent-soft: #eef0ff;
   --color-accent-line: #c7cbf5;
   --color-accent-tint: #a5b4fc;
+  --color-blue: #2268f8; /* favicon blue; footer email link */
+  --color-blue-hover: #1b54cc;
   --color-wood: #c98354; /* shaded pencil wood from the home hero artwork; home marquee gradient */
   --color-wood-dark: #5b3a20; /* deepest wood shadow in the same artwork; marquee gradient end */
   --color-text-1: #262626; /* strong body copy on white */
@@ -202,6 +204,106 @@
   100% { transform: translate(-10%, -2%) scale(1); }
 }
 
+/* Deck book (contact page): a closed hardcover with the deck sliding half out */
+.deck-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  border-radius: var(--radius-tile);
+  background:
+    radial-gradient(60% 70% at 72% 22%, color-mix(in srgb, var(--color-accent) 50%, transparent), transparent 70%),
+    radial-gradient(50% 60% at 12% 95%, color-mix(in srgb, var(--color-blue) 28%, transparent), transparent 70%),
+    var(--color-ink);
+  perspective: 1600px;
+}
+.deck-scene {
+  position: relative;
+  width: 64%;
+  aspect-ratio: 16 / 10;
+  margin: 8% 10% 0 0;
+  transform: rotateX(10deg) rotateY(-16deg) rotateZ(-3deg);
+  transform-style: preserve-3d;
+}
+/* The deck page, tucked inside the cover and pulled half out to the upper right */
+.deck-sheet {
+  position: absolute;
+  inset: 4% 3%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--color-paper);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transform: translate(30%, -30%) rotate(4deg) translateZ(-2px);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.deck-stage:hover .deck-sheet {
+  transform: translate(40%, -38%) rotate(6deg) translateZ(-2px);
+}
+/* Hardcover: ink → indigo board with a raised spine */
+.deck-case {
+  position: absolute;
+  inset: 0;
+  border-radius: 5px 12px 12px 5px;
+  background: linear-gradient(135deg, #1b1a3a 0%, var(--color-ink) 45%, color-mix(in srgb, var(--color-accent) 70%, var(--color-ink)) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 30px 50px -10px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+}
+.deck-case-spine {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 9%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(0, 0, 0, 0.45) 62%,
+    rgba(255, 255, 255, 0.06) 70%,
+    transparent 100%
+  );
+}
+.deck-case-face {
+  position: absolute;
+  inset: 0 0 0 9%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 9% 9% 8%;
+}
+/* White "foil" logo with a faint emboss */
+.deck-case-logo {
+  width: 46%;
+  height: auto;
+  filter: brightness(0) invert(1) drop-shadow(0 1px 0 rgba(0, 0, 0, 0.6));
+  opacity: 0.92;
+}
+.deck-case-label {
+  font-family: var(--font-mono);
+  font-size: clamp(9px, 1vw, 12px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent-tint);
+}
+.deck-case-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.14) 0%, transparent 32%, transparent 70%, rgba(255, 255, 255, 0.05) 100%);
+  pointer-events: none;
+}
+.deck-shadow {
+  position: absolute;
+  left: 14%;
+  right: 22%;
+  bottom: 10%;
+  height: 14%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  filter: blur(26px);
+  pointer-events: none;
+}
+
 /* Logo marquee pauses on hover */
 .mz-logos:hover .mz-logos-track {
   animation-play-state: paused;
@@ -302,20 +404,6 @@
 .is-run .hw-node i { background: var(--color-accent); }
 .is-done .hw-node { border-color: var(--color-accent); background: var(--color-accent); }
 .is-done .hw-node i { background: #fff; }
-.hw-log {
-  list-style: none; margin: 0; padding: 14px 16px; border-radius: 14px; background: #f7f7ff;
-  border: 1px solid #e4e6fb; display: flex; flex-direction: column; gap: 8px;
-  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.5; color: var(--color-accent-hover);
-}
-.hw-log li { opacity: 0; transform: translateX(-8px); transition: opacity 0.4s ease, transform 0.4s ease; }
-.is-run .hw-log li, .is-done .hw-log li { opacity: 1; transform: none; }
-.is-run .hw-log li:nth-child(2) { transition-delay: 0.35s; }
-.is-run .hw-log li:nth-child(3) { transition-delay: 0.7s; }
-.hw-cur {
-  display: inline-block; width: 7px; height: 13px; margin-left: 4px; vertical-align: -2px;
-  background: var(--color-accent); opacity: 0;
-}
-.is-run .hw-cur { opacity: 1; animation: hw-blink 1s steps(2) infinite; }
 .hw-st {
   display: none; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px;
@@ -365,5 +453,4 @@
   }
   /* Pipeline stays fully readable without animation */
   .hw-card { opacity: 1; transform: none; }
-  .hw-log li { opacity: 1; transform: none; }
 }

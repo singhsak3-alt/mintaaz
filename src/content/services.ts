@@ -63,8 +63,6 @@ export type PipelineStage = {
   icon: StageIcon;
   headline: string;
   text: string;
-  /** Agent log lines; the last one carries the blinking cursor while running */
-  log: string[];
   tools: string[];
   humanCall: string;
 };
@@ -78,11 +76,6 @@ export const pipelineStages: PipelineStage[] = [
     icon: "discover",
     headline: "Research agents read the room",
     text: "We brief a team of research agents on your market, then sit down with you to separate real signal from noise.",
-    log: [
-      "› research-agent · crawling competitors & reviews",
-      "› synth-agent · clustering interview notes",
-      "✓ insight map ready for review",
-    ],
     tools: ["Market scan", "Review mining", "Insight clustering"],
     humanCall: "together we choose the problems worth solving.",
   },
@@ -91,11 +84,6 @@ export const pipelineStages: PipelineStage[] = [
     icon: "define",
     headline: "Strategy, stress-tested by models",
     text: "Positioning, scope and a fixed plan — with AI simulating how your audience might react before anything is committed.",
-    log: [
-      "› persona-agent · drafting audience profiles",
-      "› flow-agent · mapping journeys & sitemap options",
-      "✓ scope and estimate locked",
-    ],
     tools: ["Persona drafts", "Flow options", "Naming & voice"],
     humanCall: "every AI persona gets checked against real people.",
   },
@@ -104,11 +92,6 @@ export const pipelineStages: PipelineStage[] = [
     icon: "build",
     headline: "Generate wide, then craft deep",
     text: "Generative tools open up far more directions than we could sketch by hand. Our designers and developers refine the right one and build it properly.",
-    log: [
-      "› concept-agent · rendering moodboards & variants",
-      "› code-copilot · scaffolding components",
-      "› qa-agent · testing every breakpoint",
-    ],
     tools: ["Concept generation", "AI-assisted code", "Automated QA"],
     humanCall: "a review with you every week, on real working screens.",
   },
@@ -117,11 +100,6 @@ export const pipelineStages: PipelineStage[] = [
     icon: "launch",
     headline: "Agents stay on watch after launch",
     text: "We ship and hand everything over. Monitoring agents keep checking speed, access and analytics, and flag what to improve next.",
-    log: [
-      "› audit-agent · accessibility & speed checks",
-      "› insight-agent · weekly analytics digest",
-      "✓ next experiments queued",
-    ],
     tools: ["Perf audits", "Analytics digests", "A/B ideas"],
     humanCall: "a real person stays on call as you grow.",
   },

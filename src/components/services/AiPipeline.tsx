@@ -93,14 +93,6 @@ function StageCard({ stage, index }: { stage: PipelineStage; index: number }) {
         {stage.headline}
       </p>
       <p className="m-0 text-base leading-[1.6] text-text-3">{stage.text}</p>
-      <ul className="hw-log" aria-label="Agent activity">
-        {stage.log.map((line, i) => (
-          <li key={line}>
-            {line}
-            {i === stage.log.length - 1 && <span className="hw-cur" />}
-          </li>
-        ))}
-      </ul>
       <div className="flex flex-wrap gap-1.5">
         {stage.tools.map((t) => (
           <span

@@ -18,11 +18,28 @@ export type FormKind = (typeof formTabs)[number]["id"];
 export const needs = ["Brand identity", "Website", "App / product", "Campaign", "3D & renders", "Motion"];
 export const budgets = ["Under ₹5L", "₹5–15L", "₹15–40L", "₹40L+"];
 
+/**
+ * "Download company deck" section on the Contact page, under the form.
+ * Drop the PDF at public/downloads/mintaaz-company-deck.pdf and the cover at
+ * public/images/contact/company-deck-cover.(webp|png|jpg); until then the cover
+ * shows a placeholder and the button shows "Deck coming soon".
+ */
+export const companyDeck = {
+  title: ["Download company ", "deck"] as const,
+  text: "Who we are, how we work and a look at selected projects, in one short PDF you can share with your team.",
+  file: "/downloads/mintaaz-company-deck.pdf",
+  fileName: "Mintaaz-company-deck.pdf",
+  /** Thumbnail: a closed hardcover with this first deck page sliding out of it. */
+  cover: { src: "/images/contact/company-deck-cover", alt: "Cover of the Mintaaz company deck" },
+  /** Small foil line on the book cover */
+  coverLabel: "Company deck · 2026",
+};
+
 export const studio = {
   callTitle: ["Rather talk it ", "through?"] as const,
   callText: "Grab a free 20-minute intro call with our founder.",
   // Swap for a Calendly / Cal.com link when available.
-  callHref: "mailto:info@mintaaz.com?subject=Intro%20call",
+  callHref: "mailto:sarah@mintaaz.com?subject=Intro%20call",
   address: ["3rd Floor, 806, 27th Main Rd, 1st Sector, HSR Layout", "Bengaluru, Karnataka 560102"],
 };
 

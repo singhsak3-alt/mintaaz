@@ -6,7 +6,9 @@
 export const site = {
   name: "Mintaaz",
   url: "https://mintaaz.com", // TODO: confirm production domain
-  email: "info@mintaaz.com",
+  email: "sarah@mintaaz.com",
+  /** Shown as plain text "Mob: …" (not a tap-to-call link). */
+  phone: "+91 8951494141",
   tagline: ["Imagination", "Innovation", "Distinction"],
   description:
     "An independent digital design studio crafting brands, websites and motion for teams who want to be remembered.",
@@ -18,14 +20,6 @@ export type NavItem = { label: string; href: string };
 /** Header menu */
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
-  { label: "Work", href: "/work" },
-  { label: "Services", href: "/services" },
-  { label: "About us", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-
-/** Footer "Studio" column */
-export const studioNav: NavItem[] = [
   { label: "Work", href: "/work" },
   { label: "Services", href: "/services" },
   { label: "About us", href: "/about" },

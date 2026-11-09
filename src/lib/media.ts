@@ -33,6 +33,8 @@ function resolve(src: string, exts: string[]): string | null {
 
 export const resolveImage = (src: string) => resolve(src, IMAGE_EXT);
 export const resolveVideo = (src: string) => resolve(src, VIDEO_EXT);
+/** Any file with its extension in the path (e.g. a PDF download). */
+export const resolveFile = (src: string) => resolve(src, []);
 
 /* ---------------------------------------------------------------------------
    Intrinsic size from the file header (PNG, JPEG, WebP, GIF). Used when the

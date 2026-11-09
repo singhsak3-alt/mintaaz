@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { site, studioNav, socialLinks, legalLinks, logos, type NavItem } from "@/content/site";
+import { site, mainNav, socialLinks, legalLinks, logos, type NavItem } from "@/content/site";
 import { MediaImage } from "./Media";
 import { ArrowUpRight } from "./icons";
 import { FooterEyebrow } from "./FooterEyebrow";
@@ -27,19 +27,28 @@ function SmartLink({ item, className }: { item: NavItem; className?: string }) {
   );
 }
 
-function Column({ label, items }: { label: string; items: NavItem[] }) {
+/** A column entry: a link, or plain text when `href` is omitted (e.g. the phone number). */
+type ColumnItem = { label: string; href?: string };
+
+function Column({ label, items }: { label: string; items: ColumnItem[] }) {
+  const cls = "py-1.5 text-[17px] no-underline max-md:border-b max-md:border-line max-md:py-4";
   return (
-    <div role="group" aria-label={label} className="flex flex-col gap-1.5">
-      {items.map((item) => (
-        <SmartLink
-          key={item.label}
-          item={item}
-          className="py-1.5 text-[17px] no-underline"
-        />
-      ))}
+    <div role="group" aria-label={label} className="flex flex-col gap-1.5 max-md:gap-0">
+      {items.map((item) =>
+        item.href ? (
+          <SmartLink key={item.label} item={{ label: item.label, href: item.href }} className={cls} />
+        ) : (
+          <span key={item.label} className={cls}>
+            {item.label}
+          </span>
+        ),
+      )}
     </div>
   );
 }
+
+/** Social profiles listed in site.ts but left out of the footer. */
+const FOOTER_HIDDEN_SOCIAL = ["Behance", "Dribbble"];
 
 export function Footer() {
   const mailto = `mailto:${site.email}`;
@@ -55,13 +64,16 @@ export function Footer() {
             Have a project <span className="serif-accent">in mind?</span>
           </p>
         </div>
-        <a
-          href={mailto}
-          className="inline-flex items-center gap-4 border-b-[1.5px] border-ink py-2 font-serif text-[clamp(30px,3vw,44px)] italic leading-none no-underline"
-        >
-          {site.email}
-          <ArrowUpRight size={22} strokeWidth={2} />
-        </a>
+        <div className="flex flex-col items-start gap-3">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-4 border-b-[1.5px] border-blue py-2 font-serif text-[clamp(30px,3vw,44px)] italic leading-none text-blue no-underline transition-colors duration-200 hover:border-blue-hover hover:text-blue-hover"
+          >
+            {site.email}
+            <ArrowUpRight size={22} strokeWidth={2} />
+          </Link>
+          <p className="m-0 text-[17px] text-blue">Mob: {site.phone}</p>
+        </div>
       </div>
 
       {/* Brand + link columns */}
@@ -92,14 +104,15 @@ export function Footer() {
 
         <nav
           aria-label="Footer"
-          className="grid flex-[3_1_480px] grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] items-start gap-x-8 gap-y-12"
+          className="grid flex-[3_1_480px] grid-cols-1 items-start md:grid-cols-[repeat(auto-fit,minmax(min(100%,150px),1fr))] md:gap-x-8 md:gap-y-12 max-md:border-t max-md:border-line"
         >
-          <Column label="Studio" items={studioNav} />
-          <Column label="Follow" items={socialLinks} />
+          <Column label="Menu" items={mainNav} />
+          <Column label="Follow" items={socialLinks.filter((l) => !FOOTER_HIDDEN_SOCIAL.includes(l.label))} />
           <Column
             label="Get in touch"
             items={[
               { label: site.email, href: mailto },
+              { label: `Mob: ${site.phone}` },
               { label: "Start a project ↗", href: "/contact" },
               { label: "FAQ", href: "/contact#faq" },
             ]}

@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/Button";
 import { DotCluster } from "@/components/DotCluster";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { Accent } from "@/components/SectionHeader";
+import { CompanyDeck } from "@/components/contact/CompanyDeck";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Greeting } from "@/components/contact/Greeting";
 import { contactIntro, faqs, studio } from "@/content/contact";
@@ -29,9 +30,10 @@ function SidePanel() {
       <div className="flex flex-col gap-6 rounded-card-lg border border-line p-8">
         <div>
           <p className="eyebrow m-0 mb-2 text-[11px] tracking-[0.08em]">New business</p>
-          <a href={`mailto:${site.email}`} className="text-[17px] underline-offset-4">
+          <a href={`mailto:${site.email}`} className="text-[17px] text-blue underline underline-offset-4 transition-colors duration-200 hover:text-blue-hover">
             {site.email}
           </a>
+          <p className="m-0 mt-1 text-[17px] text-text-2">Mob: {site.phone}</p>
         </div>
         <div>
           <p className="eyebrow m-0 mb-2 text-[11px] tracking-[0.08em]">Studio</p>
@@ -78,6 +80,9 @@ export default function ContactPage() {
           <SidePanel />
         </div>
       </section>
+
+      <CompanyDeck />
+
 
       <section id="faq" className="mx-auto box-border max-w-[880px] px-8 pt-40 max-[480px]:px-4">
         <div className="text-center">
