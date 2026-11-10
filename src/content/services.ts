@@ -51,6 +51,13 @@ export const servicesHero = {
   lead: "Designers, developers and 3D artists under one roof — so the idea you approve is the one that ships.",
 };
 
+/** 20-second studio reel under the hero: muted autoplay loop with hover controls. */
+export const showreel = {
+  src: "/videos/services/showreel",
+  poster: "/videos/services/showreel-poster",
+  label: "Mintaaz showreel: a 20-second montage of recent brand, product and 3D work",
+};
+
 export const processIntro = {
   text: "Behind every project runs a crew of AI agents — researching, drafting, testing and watching the numbers.",
   strong: "Scroll to run the pipeline; our team signs off every stage.",

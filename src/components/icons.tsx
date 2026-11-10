@@ -70,6 +70,32 @@ export const Close = (p: IconProps) => (
   </Svg>
 );
 
+/** ▶ / ❚❚ video play and pause (filled) */
+export const Play = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M7 4.5v15l12-7.5z" fill="currentColor" />
+  </Svg>
+);
+
+export const Pause = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M8 5v14M16 5v14" />
+  </Svg>
+);
+
+/** ⤢ enter / exit fullscreen */
+export const Expand = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" />
+  </Svg>
+);
+
+export const Shrink = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5" />
+  </Svg>
+);
+
 export const Check = (p: IconProps) => (
   <Svg {...p}>
     <path d="M5 12l5 5L20 7" />

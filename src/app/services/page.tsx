@@ -4,7 +4,9 @@ import { ButtonLink } from "@/components/Button";
 import { DotCluster } from "@/components/DotCluster";
 import { Accent } from "@/components/SectionHeader";
 import { AiPipeline } from "@/components/services/AiPipeline";
-import { aboutBand, processIntro, servicesHero } from "@/content/services";
+import { ShowreelPlayer } from "@/components/services/ShowreelPlayer";
+import { resolveImage, resolveVideo } from "@/lib/media";
+import { aboutBand, processIntro, servicesHero, showreel } from "@/content/services";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -54,6 +56,16 @@ function Hero() {
           </svg>
         </div>
       </div>
+    </section>
+  );
+}
+
+function Showreel() {
+  const src = resolveVideo(showreel.src);
+  if (!src) return null;
+  return (
+    <section aria-label="Showreel" className="container-site pt-24">
+      <ShowreelPlayer src={src} poster={resolveImage(showreel.poster) ?? undefined} label={showreel.label} />
     </section>
   );
 }
@@ -112,6 +124,7 @@ export default function ServicesPage() {
   return (
     <main>
       <Hero />
+      <Showreel />
       <ServicesPanel
         showNumbers
         className="pt-24"
